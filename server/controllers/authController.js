@@ -1,5 +1,6 @@
 console.log("JWT_SECRET =", process.env.JWT_SECRET);
-const User = require("../models/User");
+
+const User = require("../models/user"); // <-- small 'u'
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -28,7 +29,6 @@ const registerUser = async (req, res) => {
       message: "User Registered Successfully",
       user,
     });
-
   } catch (err) {
     res.status(500).json({
       message: err.message,
@@ -68,7 +68,6 @@ const loginUser = async (req, res) => {
       token,
       user,
     });
-
   } catch (err) {
     res.status(500).json({
       message: err.message,
