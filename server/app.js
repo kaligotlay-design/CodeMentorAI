@@ -6,8 +6,18 @@ const authMiddleware = require("./middleware/authMiddleware");
 
 const app = express();
 
-// Middleware
-app.use(cors());
+// CORS
+app.use(
+  cors({
+    origin: [
+      "https://code-mentor-ai-amber.vercel.app",
+      "https://code-mentor-fde7h33ei-yuva-design.vercel.app",
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 // Routes
@@ -24,12 +34,13 @@ app.get("/api/profile", authMiddleware, (req, res) => {
     message: "Welcome! This is a Protected Route.",
     user: req.user,
   });
-});app.delete("/test-delete", (req, res) => {
-  res.json({
-    message: "Delete Route Working"
-  });
 });
 
+app.delete("/test-delete", (req, res) => {
+  res.json({
+    message: "Delete Route Working",
+  });
+});
 
 // Test Route
 app.get("/", (req, res) => {
